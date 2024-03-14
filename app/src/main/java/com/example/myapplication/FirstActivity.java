@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 public class FirstActivity extends AppCompatActivity {
 
     @Override
@@ -14,11 +16,19 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
 
         Button buttonToSecond = findViewById(R.id.buttonToSecond);
+        TextInputEditText inputText = findViewById(R.id.inputTextSecond);
+
+        DatabaseTextInput db = new DatabaseTextInput(this);
+        String text = db.getText(ConstsSettings.FirstInputTextIndexDataBaseText);
+        if (text != null) {
+            inputText.setText(text);
+        }
         buttonToSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
                 startActivity(intent);
+                DataBases.saveToTextInputDataBase(inputText, FirstActivity.this, ConstsSettings.FirstInputTextIndexDataBaseText);
             }
         });
     }

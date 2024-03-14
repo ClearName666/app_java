@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"> <!-- Белый фон -->
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="введи текст" />
+
     <Button
         android:id="@+id/buttonToFirst"
         android:layout_width="wrap_content"
