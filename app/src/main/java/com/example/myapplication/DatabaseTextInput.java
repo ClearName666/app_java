@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+// бфза данных хранти в себе тексты в полях для ввода текста
 public class DatabaseTextInput extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Data.db";
     private static final int DATABASE_VERSION = 1;
@@ -13,10 +14,12 @@ public class DatabaseTextInput extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_TEXT = "text";
 
+    // коструктор
     public DatabaseTextInput(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // создание базы данных
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
@@ -25,6 +28,7 @@ public class DatabaseTextInput extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE);
     }
 
+    // удалание базы даннных
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -40,6 +44,8 @@ public class DatabaseTextInput extends SQLiteOpenHelper {
         db.replace(TABLE_NAME, null, values);
         db.close();
     }
+
+    // метод для получения из базы данных текста по нужному индексу
     public String getText(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String text = null;

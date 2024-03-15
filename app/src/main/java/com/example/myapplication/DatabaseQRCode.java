@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
+// класс для управления базой данных хранящию qr коды
 public class DatabaseQRCode extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "DataQRCode.db";
     private static final int DATABASE_VERSION = 1;
@@ -17,6 +18,7 @@ public class DatabaseQRCode extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // создание базы данных
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
@@ -25,12 +27,14 @@ public class DatabaseQRCode extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE);
     }
 
+    // удалания базы данных
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
+    // добавление текста qr кода в базу данных
     public void addText(String textQR) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -39,6 +43,7 @@ public class DatabaseQRCode extends SQLiteOpenHelper {
         db.close();
     }
 
+    // получение всех qr кодов из базы даннх
     public ArrayList<String> getAllQRCodes() {
         ArrayList<String> retQRCodes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -57,6 +62,7 @@ public class DatabaseQRCode extends SQLiteOpenHelper {
         return retQRCodes;
     }
 
+    // удаление всех кодов базы данных
     public void delAllQRCodes() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, null, null);

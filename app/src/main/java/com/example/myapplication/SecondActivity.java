@@ -23,6 +23,7 @@ public class SecondActivity extends AppCompatActivity {
         if (text != null) {
             inputText.setText(text);
         }
+
         buttonToThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

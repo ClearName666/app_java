@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.android.material.textfield.TextInputEditText;
 
+// главаная страничка приложения
 public class MainActivity extends AppCompatActivity {
+
 
     private static final int SCAN_REQUEST_CODE = 111;
     @Override
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             inputText.setText(text);
         }
 
+        // кнопка для перехода на следующию стрничку
         buttonToFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 DataBases.saveToTextInputDataBase(inputText, MainActivity.this, ConstsSettings.MainInputTextIndexDataBaseText);
             }
         });
+
+        // кнопка для добавления qr кода в базу данных переходит в приложение Binary Eye
         buttonAddQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, SCAN_REQUEST_CODE);
             }
         });
+
+        // кнопка для яочищения всех записей в базе данных qr кодов
         buttonDelAllQRCodes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    // метод для перехода в стороннее приложение
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

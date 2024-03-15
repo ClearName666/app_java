@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+// 1-ое окошко для перехода
 public class FirstActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +24,8 @@ public class FirstActivity extends AppCompatActivity {
         if (text != null) {
             inputText.setText(text);
         }
+
+        // кнопка для перехода на слудующию страничку
         buttonToSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

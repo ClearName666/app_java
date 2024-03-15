@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myapplication.databinding.FragmentFirstBinding;
 
+// 2-ое окошко для перехода
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
