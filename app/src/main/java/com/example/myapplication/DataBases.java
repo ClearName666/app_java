@@ -10,4 +10,5 @@ public class DataBases {
         DatabaseTextInput db = new DatabaseTextInput((thisClass));
         db.addText(indexInputText, str);
     }
+    
 }
