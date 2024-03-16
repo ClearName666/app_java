@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 // класс для управления базой данных хранящию qr коды
@@ -44,8 +47,8 @@ public class DatabaseQRCode extends SQLiteOpenHelper {
     }
 
     // получение всех qr кодов из базы даннх
-    public ArrayList<String> getAllQRCodes() {
-        ArrayList<String> retQRCodes = new ArrayList<>();
+    public ArrayList<View> getAllQRCodes(Context context) {
+        ArrayList<View> retQRCodes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
@@ -53,7 +56,10 @@ public class DatabaseQRCode extends SQLiteOpenHelper {
             do {
                 int index = cursor.getColumnIndex(COLUMN_TEXT);
                 String textQR = cursor.getString(index);
-                retQRCodes.add(textQR);
+                TextView textView = new TextView(context);
+                textView.setText(textQR);
+                retQRCodes.add(textView);
+
             } while (cursor.moveToNext());
         }
         cursor.close();

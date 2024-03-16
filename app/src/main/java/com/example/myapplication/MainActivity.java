@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,11 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         TextInputEditText inputText = findViewById(R.id.inputText);
 
+
+
         DatabaseTextInput db = new DatabaseTextInput(this);
         String text = db.getText(ConstsSettings.MainInputTextIndexDataBaseText);
         if (text != null) {
             inputText.setText(text);
         }
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewQrCode);
+        RecyclerAddLines.ViewDatadaseQRCodes(recyclerView, this);
 
         // кнопка для перехода на следующию стрничку
         buttonToFirst.setOnClickListener(new View.OnClickListener() {
@@ -49,17 +56,33 @@ public class MainActivity extends AppCompatActivity {
         buttonAddQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-                startActivityForResult(intent, SCAN_REQUEST_CODE);
+                try {
+
+                    Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+                    startActivityForResult(intent, SCAN_REQUEST_CODE);
+                } catch (ActivityNotFoundException e) {
+                    try {
+                        Intent intentMarket = new Intent(Intent.ACTION_VIEW);
+                        intentMarket.setData(Uri.parse("market://details?id=de.markusfisch.android.binaryeye"));
+                        startActivity(intentMarket);
+                    } catch (ActivityNotFoundException ex) {
+                        Intent intentBrowser = new Intent(Intent.ACTION_VIEW);
+                        intentBrowser.setData(Uri.parse("https://play.google.com/store/apps/details?id=de.markusfisch.android.binaryeye"));
+                        startActivity(intentBrowser);
+                    }
+                }
+
             }
         });
 
-        // кнопка для яочищения всех записей в базе данных qr кодов
+        // кнопка для очищения всех записей в базе данных qr кодов
         buttonDelAllQRCodes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseQRCode databaseQRCode = new DatabaseQRCode(MainActivity.this);
                 databaseQRCode.delAllQRCodes();
+                RecyclerView recyclerView = findViewById(R.id.recyclerViewQrCode);
+                RecyclerAddLines.delAllRecycler(recyclerView, MainActivity.this);
             }
         });
     }
@@ -71,16 +94,12 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == SCAN_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("SCAN_RESULT");
-
-                //RecyclerView recyclerViewQrCode = findViewById(R.id.recyclerViewQrCode);
                 DatabaseQRCode codes = new DatabaseQRCode(this);
                 codes.addText(result);
-                Log.d("ScanResult", "Отсканированный текст: " + result);
-                ArrayList<String> qrCodeDB = codes.getAllQRCodes();
-                for (String item : qrCodeDB) {
-                    Log.d("ScanResult", item);
-                }
+                codes.close();
 
+                RecyclerView recyclerView = findViewById(R.id.recyclerViewQrCode);
+                RecyclerAddLines.ViewDatadaseQRCodes(recyclerView, MainActivity.this);
 
             } else if (resultCode == RESULT_CANCELED) {
                 Log.d("ScanResult", "Сканирование было отменено");
