@@ -15,5 +15,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Далее"
-        android:layout_centerInParent="true"/>
+
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="650dp"/>
+    <Button
+        android:id="@+id/buttonGoWedView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Отобразить"
+
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="16dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="100dp">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="150dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputURLWeb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите url" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </RelativeLayout>
