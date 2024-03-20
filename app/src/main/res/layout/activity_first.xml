@@ -2,18 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"> <!-- Желтый фон -->
+    android:background="#FFEB3B">
 
     <Button
         android:id="@+id/buttonToSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="16dp"
         android:text="Далее" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/buttonStartToURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="120dp"
+        android:text="Выполнить запрос" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputText"
@@ -27,4 +35,97 @@
             android:layout_height="wrap_content"
             android:hint="hint" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputTextURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите URL"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputTextURLEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputTextPOST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="220dp"
+        android:layout_marginBottom="64dp"
+        android:hint="POST параметры">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputTextPOSTEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputTextGET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="64dp"
+        android:hint="GET параметры">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputTextGETEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewLondHTTPResponse"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/textViewEditTextHTTPResponse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="HTTP ответ"
+            android:textColor="#000000"/>
+
+    </ScrollView>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="60dp"> <!-- Или vertical, в зависимости от того, как вы хотите расположить кнопки -->
+
+        <RadioButton
+            android:id="@+id/radioButtonPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="POST"
+            android:checked="true" /> <!-- По умолчанию эта кнопка выбрана -->
+
+        <RadioButton
+            android:id="@+id/radioButtonGet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GET" />
+    </RadioGroup>
+
 </RelativeLayout>
