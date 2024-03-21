@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -9,11 +10,14 @@ import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.InputStream;
+import java.util.concurrent.ExecutorService;
+
 public class HttpConnection {
-    public static String CreateGetRequest(String urlStr/*, String urlParameters*/){
+    public static String CreateGetRequest(String urlStr, String urlParameters){
         HttpURLConnection connection = null;
+        String ErrorMsg = new String();
         try {
-            URL url = new URL(urlStr);
+            URL url = new URL(urlStr+urlParameters);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -32,16 +36,18 @@ public class HttpConnection {
             return response.toString();
 
         } catch (Exception e) {
-            Log.e("Error", "Exception occurred", e);
+            Log.d("Ошибка", e.getClass().toString());
+            ErrorMsg = e.getClass().toString();
         } finally {
             if (connection != null)
                 connection.disconnect();
         }
-        return "Не удалось получить ответ";
+        return ErrorMsg;
     }
 
     public static String CreatePOSTRequest(String urlStr, String urlParameters) {
         HttpURLConnection connection = null;
+        String ErrorMsg = new String();
         try {
             URL url = new URL(urlStr);
             connection = (HttpURLConnection) url.openConnection();
@@ -62,11 +68,12 @@ public class HttpConnection {
             }
             return result.toString();
         } catch (Exception e) {
-            Log.e("Error", "Exception occurred", e);
+            Log.d("Ошибка", e.getClass().toString());
+            ErrorMsg = e.getClass().toString();
         } finally {
             if (connection != null)
                 connection.disconnect();
         }
-        return "Не удалось получить ответ";
+        return ErrorMsg;
     }
 }

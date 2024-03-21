@@ -81,6 +81,9 @@ public class FirstActivity extends AppCompatActivity {
                                 inputPOSTParameters.getText().toString()
                         );
                         runOnUiThread(() -> {
+                            if (response.length() < 50) {
+                                Alert.CreateAlertDialogOK(FirstActivity.this, "Ошибка", response);
+                            }
                             TextView textViewEditTextHTTPResponse = findViewById(R.id.textViewEditTextHTTPResponse);
                             textViewEditTextHTTPResponse.setText(response);
 
@@ -93,7 +96,11 @@ public class FirstActivity extends AppCompatActivity {
                 if (getRadioButton.isChecked()) {
                     ExecutorService executor = Executors.newSingleThreadExecutor();
                     executor.submit(() -> {
-                        String response = HttpConnection.CreateGetRequest(inputURL.getText().toString());
+                        TextInputEditText inputGETParameters = findViewById(R.id.inputTextGETEditText);
+                        String response = HttpConnection.CreateGetRequest(
+                                inputURL.getText().toString(),
+                                inputGETParameters.getText().toString()
+                        );
                         runOnUiThread(() -> {
                             TextView textViewEditTextHTTPResponse = findViewById(R.id.textViewEditTextHTTPResponse);
                             textViewEditTextHTTPResponse.setText(response);
