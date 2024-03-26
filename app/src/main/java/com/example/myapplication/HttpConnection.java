@@ -17,12 +17,9 @@ public class HttpConnection {
         HttpURLConnection connection = null;
         String ErrorMsg = new String();
         try {
-            URL url = new URL(urlStr+urlParameters);
+            URL url = new URL(urlStr+ "?" + urlParameters);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-
-            // int responseCode = connection.getResponseCode();
-            // System.out.println("Response Code: " + responseCode);
             
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
